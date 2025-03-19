@@ -41,7 +41,7 @@ public class ProdutosDAO {
 
     public ArrayList<ProdutosDTO> listarProdutos() {
          ArrayList<ProdutosDTO> listagem = new ArrayList<>();
-        String sql = "SELECT nome, valor, status FROM produtos";
+        String sql = "SELECT id, nome, valor, status FROM produtos";
         
         try {
             conn = new conectaDAO().connectDB(); // Estabelece a conexão
@@ -50,7 +50,7 @@ public class ProdutosDAO {
             
             while (resultSet.next()) {
                 ProdutosDTO produto = new ProdutosDTO();
-                produto.setId(resultSet.getInt("Id"));
+                produto.setId(resultSet.getInt("id"));
                 produto.setNome(resultSet.getString("nome"));
                 produto.setValor(resultSet.getInt("valor"));
                 produto.setStatus(resultSet.getString("status"));
