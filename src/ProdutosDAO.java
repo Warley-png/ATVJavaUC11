@@ -50,6 +50,7 @@ public class ProdutosDAO {
             
             while (resultSet.next()) {
                 ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(resultSet.getInt("Id"));
                 produto.setNome(resultSet.getString("nome"));
                 produto.setValor(resultSet.getInt("valor"));
                 produto.setStatus(resultSet.getString("status"));
