@@ -1,3 +1,8 @@
+
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,6 +19,7 @@ public class ConsultarVendas extends javax.swing.JFrame {
      */
     public ConsultarVendas() {
         initComponents();
+        listarVendas();
     }
 
     /**
@@ -124,4 +130,26 @@ public class ConsultarVendas extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+private void listarVendas() {
+        try {
+            ProdutosDAO produtosdao = new ProdutosDAO();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setNumRows(0); 
+
+            ArrayList<ProdutosDTO> listagem = produtosdao.listarProdutosVendidos();
+
+            for (ProdutosDTO produto : listagem) {
+                model.addRow(new Object[]{
+                    produto.getId(),
+                    produto.getNome(),
+                    produto.getValor(),
+                    produto.getStatus()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar vendas: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
 }
